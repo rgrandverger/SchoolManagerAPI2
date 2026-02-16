@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolManagerAPI2.Data;
+using SchoolManagerAPI2.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,9 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext")));
+
+builder.Services.AddScoped<IUcenikService, UcenikService>();
+builder.Services.AddScoped<IRazredService, RazredService>();  
 
 var app = builder.Build();
 
